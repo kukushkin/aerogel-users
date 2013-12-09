@@ -12,7 +12,7 @@ An aerogel module skeleton. Starting point for any generic aerogel module.
 In your application's config.ru:
 ```ruby
 require 'aerogel'
-require 'aerogel/module123' # ...replace to your module name
+require 'aerogel/module123' # ...change to your module name
 
 run Aerogel::Application
 ```
