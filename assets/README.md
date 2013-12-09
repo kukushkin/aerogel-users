@@ -1,0 +1,1 @@
+All subfolders of this one will be served by Sprockets pipeline. Exact names, i.e. ```css/``` and ```scripts/```, are irrelevant and serve only for better organization of assets.
