@@ -2,6 +2,7 @@
 
 An aerogel module skeleton. Starting point for any generic aerogel module.
 
+This module template includes all folders an aerogel module can use. None of these folders are obligatory and can be omitted from final module.
 
 ## Usage
 
