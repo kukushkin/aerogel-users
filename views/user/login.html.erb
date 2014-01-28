@@ -1,0 +1,13 @@
+<h1>Login</h1>
+
+<% form params, action: '/auth/password/callback' do %>
+    <%= hidden :on_success, '/user' %>
+    <%= hidden :on_failure, '/user/login' %>
+
+    <%= field :email %>
+    <%= field :password %>
+    <%= field :remember_me, as: :checkbox %> remember me
+
+    <%= button "Login" %>
+<% end %>
+
