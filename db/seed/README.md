@@ -1,0 +1,1 @@
+A place for *.seed files.
