@@ -1,19 +1,16 @@
-# Aerogel::Module123
+# aerogel-users
 
-An aerogel module skeleton. Starting point for any generic aerogel module.
+User management for aerogel CMS.
 
-This module template includes all folders an aerogel module can use, but none of them are obligatory. For example, if a module does not have any assets, it is perfectly safe to remove assets/* folders.
+Provides user models, helpers and routs for user registration, authentication,
+roles and access management.
 
 ## Usage
 
-1. Clone repository
-2. Rename 'module123' to your module name anywhere
-3. Add code, remove unneeded folders
-
 In your application's config.ru:
 ```ruby
-require 'aerogel'
-require 'aerogel/module123' # ...change to your module name
+require 'aerogel/core'
+require 'aerogel/users'
 
 run Aerogel::Application.load
 ```
