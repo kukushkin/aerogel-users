@@ -1,8 +1,8 @@
 require 'aerogel'
-require "aerogel/module123/version"
+require "aerogel/users/version"
 
 module Aerogel
-  module Module123
+  module Users
     # Your code goes here...
   end
 
