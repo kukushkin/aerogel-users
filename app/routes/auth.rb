@@ -1,5 +1,3 @@
-class Aerogel::Application
-
 # Authentication system routes
 route :get, :post, "/auth/:provider/callback" do
   user = User.find_by_authentication( params[:provider].to_sym, request.env['omniauth.auth']['uid'] )
@@ -61,7 +59,5 @@ before do
     redirect "/"
   end
 end
-
-end # class Aerogel::Application
 
 
