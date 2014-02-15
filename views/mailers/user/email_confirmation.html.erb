@@ -1,0 +1,6 @@
+<h1>Hello, <%= user_email.user.full_name %>!</h1>
+<p>
+    Your account is almost ready. The only thing left is to confirm your email address
+    by clicking
+    <a href="http://<%= config.hostname! %>/user/confirm_email?email=<%= user_email.email %>&token=<%= user_email.confirmation_token %>">this link</a>.
+</p>

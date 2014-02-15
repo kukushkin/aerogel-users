@@ -1,0 +1,74 @@
+model User
+
+# Attribute name or a list of attribute names to be used as key(s)
+# when finding objects
+#
+# Usage:
+#   find_by :name
+# or
+#   find_by [:first_name, :last_name]
+#
+# ! required
+find_by :full_name
+
+# Values of attributes listed here will be set even
+# if they exist already in the matching database object.
+#
+# Other attributes in the seed data will be treated as a default value,
+# i.e. they will only be set if the matching database object does not exist
+# or its corresponding attribute is not set.
+#
+# Usage:
+#   force :value
+# or:
+#   force [:value, :description]
+#
+# default is: no fields are forced
+
+#force :value
+
+seeds [
+{
+  full_name: 'test',
+  emails:[{
+    email: 'test@test',
+    confirmed: true
+  }],
+  authentications:[{
+    provider: :password,
+    uid: 'test@test',
+    email_id: 'test@test',
+    password: 'test',
+    password_confirmation: 'test'
+  }]
+},
+{
+  full_name: 'test1',
+  emails:[{
+    email: 'test1@test',
+    confirmed: true
+  }],
+  authentications:[{
+    provider: :password,
+    uid: 'test1@test',
+    email_id: 'test1@test',
+    password: 'test',
+    password_confirmation: 'test'
+  }]
+},
+{
+  full_name: 'test2',
+  emails:[{
+    email: 'test2@test',
+    confirmed: true
+  }],
+  authentications:[{
+    provider: :password,
+    uid: 'test2@test',
+    email_id: 'test2@test',
+    password: 'test',
+    password_confirmation: 'test'
+  }]
+}
+]
+

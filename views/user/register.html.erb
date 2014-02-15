@@ -1,10 +1,10 @@
-<h1>Register new user</h1>
+<h1>Create account</h1>
 
 <% form @user_registration_form do  %>
-    <%= field :name %>
+    <%= field :full_name %>
     <%= field :email %>
     <%= field :password %>
     <%= field :password_confirmation %>
-<%= button 'Register' %>
+<%= button 'Create' %>
 
 <% end %>

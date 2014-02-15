@@ -1,22 +1,25 @@
 class Authentication
 
-  VALID_TYPES = [:password, :github]
-
-  include Mongoid::Document
+  include Model
   include Aerogel::Db::SecurePassword
 
+  VALID_TYPES = [:password, :github]
 
   embedded_in :user
 
   field :provider, type: Symbol
   field :uid, type: String
-  field :email, type: String
   field :info, type: Hash
+
+  # has one :email (through embedded user.emails), optional
+  field :email_id, type: String
+
   use_secure_password
 
+
   # validations:
-  validates :provider, allow_nil: false, inclusion: { in: VALID_TYPES }
-  validates_presence_of :uid
+  validates_presence_of :provider, :uid
+  validates :provider, inclusion: { in: VALID_TYPES }
   # validates :password, length: { minimum: 8 }, allow_nil: true
 
   # validates uniqueness of provider & uid among all users
@@ -33,6 +36,13 @@ class Authentication
   end
 
   # virtual attributes:
+
+  # Returns email associated with this Authentication
+  #
+  def email
+    user.emails.where( email: self.email_id ).first
+  end
+
 
   # methods:
 

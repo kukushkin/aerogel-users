@@ -1,7 +1,7 @@
 %div
     hello
 
-name: <%= current_user.name %>
+name: <%= current_user.full_name %>
 authentications:
 <% current_user.authentications.each do |a| %>
     <p><%= h a.inspect %></p>
