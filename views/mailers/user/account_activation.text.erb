@@ -1,0 +1,6 @@
+Welcome, <%= user_email.user.full_name %>!
+
+Your account is almost ready. The only thing left is to confirm your email address.
+To do this, copy and paste the following URL into your browser's address bar and press Enter.
+
+http://<%= config.hostname! %>/user/activate_account?email=<%= user_email.email %>&token=<%= user_email.confirmation_token %>

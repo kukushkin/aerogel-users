@@ -76,10 +76,35 @@ class User
     SecureRandom::hex
   end
 
+  # Requests activation of newly registered user:
+  # requests confirmation of email used in password authentication.
+  #
+  def request_activation!
+    object = emails.first
+    request_email_confirmation!( object.email )
+  end
+
+  # Activates account: confirms user email used in password authentication.
+  # Returns corresponding User object on success.
+  # Raises error if confirmation fails.
+  #
+  def self.activate!( email, token )
+    confirm_email! email, token
+  end
+
+  # Returns +true+ if user is activated and password authentication uses +email+.
+  #
+  def activated?( email )
+    a = authentications.where( uid: email ).first
+    return false unless a
+    a.email.email == email && a.email.confirmed
+  end
+
+
   # Requests confirmation of given email address.
   # Returns corresponding UserEmail object with newly generated confirmation_token
   #
-  def request_email_confirmation( email )
+  def request_email_confirmation!( email )
     object = emails.where( email: email ).first
     raise "Email '#{email}' does not belong to user" unless object
     object.confirmation_token = User.generate_confirmation_token

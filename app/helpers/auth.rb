@@ -31,3 +31,19 @@ def current_user
   auth_keepalive_session
   @current_user ||= ( session[:user_id] ? User.find( session[:user_id] ) : nil )
 end
+
+# Gets or sets auth state.
+# 'auth state' is a one-time used Hash used to store auth system data between requests.
+#
+def auth_state( value = nil )
+  if value
+    @auth_state = value
+    session[:auth_state] = value.to_json
+    return @auth_state
+  end
+  unless @auth_state
+    @auth_state = session[:auth_state].nil? ? {} : JSON.parse( session[:auth_state] )
+    session[:auth_state] = nil
+  end
+  @auth_state
+end
