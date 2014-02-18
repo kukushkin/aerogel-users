@@ -1,4 +1,5 @@
 require 'omniauth'
+require 'omniauth-github'
 require 'aerogel/core'
 require "aerogel/users/version"
 require "aerogel/users/omniauth-password"
@@ -16,6 +17,9 @@ module Aerogel
   on_load do |app|
     app.use OmniAuth::Builder do
       provider :password, model: User
+      if app.config.auth.github?
+        provider :github, app.config.auth.github.client_id, app.config.auth.github.client_secret
+      end
       on_failure {|env| OmniAuth::FailureEndpointEx.new(env).redirect_to_failure }
     end
   end

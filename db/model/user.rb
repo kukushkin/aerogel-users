@@ -70,6 +70,25 @@ class User
     )
   end
 
+  # Creates a User from omniauth AuthHash
+  #
+  def self.create_from_omniauth( omniauth_hash )
+    raise "Cannot create User from #{omniauth_hash.class}" unless omniauth_hash.is_a? OmniAuth::AuthHash
+
+    info = omniauth_hash['info'].to_hash
+    emails = []
+    emails << { email: info['email'], confirmed: false } if info['email']
+    self.new(
+      full_name: info['name'],
+      emails: emails,
+      authentications: [{
+        provider: omniauth_hash.provider.to_sym,
+        uid: omniauth_hash.uid,
+        info: info
+      }]
+    )
+  end
+
   # Generates secure confirmation token using +seed+ for random
   #
   def self.generate_confirmation_token()
@@ -122,7 +141,7 @@ class User
     user_email = user.emails.where( email: email ).first
     raise NotFoundError.new "Failed to find email object" unless user_email
     raise "Email is already confirmed" if user_email.confirmed?
-    raise "Confirmation token is invalid" if user_email.confirmation_token != token
+    raise "Confirmation token is invalid" if !token.nil? && user_email.confirmation_token != token
     user_email.confirmed = true
     user_email.save!
     user

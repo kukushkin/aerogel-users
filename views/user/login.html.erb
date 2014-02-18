@@ -16,6 +16,7 @@
     <%= field :remember_me, as: :checkbox %>
 
     <%= button "Log in" %>
+    using <%= link_to '/auth/github?origin='+params['on_success'], 'GitHub' %>
 <% end %>
 
 

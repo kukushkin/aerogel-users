@@ -9,15 +9,28 @@ route :get, :post, "/auth/:provider/callback" do
     auth_redirect_to_origin( params['on_failure'] )
     halt
   end
-  # registered user
-  auth_login( user, !!params['remember_me'] ) if user
 
-  username = user ? user.full_name : 'unknown-user'
-  logger.debug( "successfully authenticated: #{params.inspect} ")
-  logger.debug( "user: #{user} ")
-  auth_state result: :success
-  flash[:notice] = "Welcome, #{user.full_name}!"
-  auth_redirect_to_origin( params["on_success"] )
+  if user
+    # registered user
+
+    auth_login( user, !!params['remember_me'] ) if user
+
+    username = user ? user.full_name : 'unknown-user'
+    logger.debug( "successfully authenticated: #{params.inspect} ")
+    logger.debug( "user: #{user} ")
+    auth_state result: :success
+    flash[:notice] = "Welcome, #{user.full_name}!"
+    auth_redirect_to_origin( params["on_success"] )
+  else
+    user = User.create_from_omniauth request.env['omniauth.auth']
+    unless user.save
+      flash[:error] = "Failed to register new User: #{user.errors.inspect}"
+      auth_redirect_to_origin( params["on_failure"] )
+    end
+    auth_login( user, !!params['remember_me'] ) if user
+    flash[:notice] = "Welcome, #{user.full_name}! Please review and update your details if necessary."
+    redirect "/user/edit"
+  end
 end
 
 get "/auth/failure" do
