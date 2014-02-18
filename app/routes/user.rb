@@ -141,6 +141,31 @@ namespace '/user' do
     end
   end
 
+  #
+  # Edit user profile
+  #
+  get '/edit' do
+    @user = current_user
+    pass
+  end
+
+  post '/edit' do
+    @user = User.find( params[:id] )
+    unless @user
+      flash[:error] = "Failed to locate user profile"
+      pass
+    end
+    unless @user.id == current_user.id
+      flash[:error] = "Access denied"
+      redirect '/user'
+    end
+    unless @user.update_attributes params[:user]
+      flash[:error] = "Failed to update user profile"
+      pass
+    end
+    flash[:notice] = "User details saved"
+    redirect '/user'
+  end
 
   #
   # Common User controller routes
@@ -150,12 +175,24 @@ namespace '/user' do
     view "user/#{action}"
   end
 
-  before do
-    if request.path_info == '/user' && current_user.nil?
-      flash[:error] = "Access denied"
+  before '/*' do
+    restricted_area = %w(/user /user/edit)
+    if restricted_area.include?( request.path_info ) && current_user.nil?
+      flash[:error] = "Access denied: #{request.path_info}"
       redirect "/"
     end
+    flash[:debug] = "Access granted: #{request.path_info}"
   end
+
+  before do
+    restricted_area = %w(/user /user/edit)
+    if restricted_area.include?( request.path_info ) && current_user.nil?
+      flash[:error] = "EMPTY Access denied: #{request.path_info}"
+      redirect "/"
+    end
+    flash[:debug] = "EMPTY Access granted: #{request.path_info}"
+  end
+
 
 end # namespace '/user'
 

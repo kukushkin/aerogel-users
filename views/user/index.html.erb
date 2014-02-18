@@ -2,12 +2,17 @@
   <h1>User profile</h1>
 </div>
 
+<% form current_user do %>
+    <%= field :full_name, readonly: true %>
+    <% fieldset :emails do %>
+        <%= field :email, readonly: true %>
+        <%= field :confirmed, readonly: true %>
+    <% end %>
 <p>
-    Full name: <%= current_user.full_name %>
+    Can log in using: <%= current_user.authentications.map(&:provider).join(',') %>
 </p>
 <p>
-    emails: <%= current_user.emails.map(&:email).join(', ') %>
+    <%= link_to '/user/edit', 'Edit user profile' %>
 </p>
-<p>
-    authentication methods: <%= current_user.authentications.map(&:provider).join(',') %>
-</p>
+
+<% end %>
