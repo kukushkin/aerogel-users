@@ -181,7 +181,6 @@ namespace '/user' do
       flash[:error] = "Access denied: #{request.path_info}"
       redirect "/"
     end
-    flash[:debug] = "Access granted: #{request.path_info}"
   end
 
   before do
@@ -190,7 +189,6 @@ namespace '/user' do
       flash[:error] = "EMPTY Access denied: #{request.path_info}"
       redirect "/"
     end
-    flash[:debug] = "EMPTY Access granted: #{request.path_info}"
   end
 
 
