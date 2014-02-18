@@ -1,4 +1,4 @@
-class UserEmailConfirmationForm
+class UserRequestPasswordResetForm
 
   include Model::NonPersistent
 
@@ -14,22 +14,24 @@ class UserEmailConfirmationForm
       record.errors.add :email, 'is not registered for any user'
       return
     end
-    user_email = user.emails.where( email: record.email ).first
-    unless user_email
-      record.errors.add :email, 'object is not found for the user it belongs to'
+    authentication = user.authentications.where( provider: :password, uid: record.email ).first
+    unless authentication
+      record.errors.add :email, 'does not allow log in using password'
       return
     end
-    if user_email.confirmed
-      record.errors.add :email, 'is already confirmed'
-    end
+  end
+
+  # Returns User object, corresponding to this email address
+  #
+  def user
+    User.where( 'emails.email' => email ).first
   end
 
   # Returns UserEmail object, corresponding to this email address
   #
-  def user_email
-    user = User.where( 'emails.email' => email ).first
-    user.emails.where( email: email ).first
+  def authentication
+    user.authentications.where( provider: :password, uid: email ).first
   end
 
 
-end # class UserRegistrationForm
+end # class UserRequestPasswordResetForm

@@ -12,7 +12,7 @@
     <%= hidden :on_failure, params['on_failure'] %>
 
     <%= field :email, value: params['email'] %>
-    <%= field :password %>
+    <%= field :password, hint: link_to( '/user/request_password_reset', 'Forgot your password?') %>
     <%= field :remember_me, as: :checkbox %>
 
     <%= button "Log in" %>

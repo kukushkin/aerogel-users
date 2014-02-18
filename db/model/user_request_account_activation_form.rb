@@ -1,4 +1,4 @@
-class UserAccountActivationForm
+class UserRequestAccountActivationForm
 
   include Model::NonPersistent
 
@@ -27,4 +27,4 @@ class UserAccountActivationForm
   end
 
 
-end # class UserRegistrationForm
+end # class UserRequestAccountActivationForm

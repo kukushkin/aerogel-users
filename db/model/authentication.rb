@@ -14,6 +14,8 @@ class Authentication
   # has one :email (through embedded user.emails), optional
   field :email_id, type: String
 
+  field :password_reset_token, type: String
+
   use_secure_password
 
 

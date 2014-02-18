@@ -128,5 +128,33 @@ class User
     user
   end
 
+  # Requests password reset of authentication with given email address.
+  # Returns corresponding Authentication object with newly generated password_reset_token
+  #
+  def request_password_reset!( email )
+    object = authentications.where( provider: :password, uid: email ).first
+    raise NotFoundError.new "Failed to find password authentication for user with email:'#{email}'" unless object
+    object.password_reset_token = User.generate_confirmation_token
+    object.save!
+    object
+  end
+
+  # Resets user password using previously issued token.
+  # Returns corresponding User object on success.
+  # Raises error if password reset fails.
+  #
+  def self.reset_password!( email, token, password, password_confirmation )
+    user = self.where( 'emails.email' => email ).first
+    raise NotFoundError.new "Failed to find user by email" unless user
+    authentication = user.authentications.where( provider: :password, uid: email ).first
+    raise NotFoundError.new "Failed to find password authentication for user with email:'#{email}'" unless authentication
+    raise "Password reset is not requested" if authentication.password_reset_token.nil?
+    raise "Password reset token is invalid" if authentication.password_reset_token != token
+    authentication.password = password
+    authentication.password_confirmation = password_confirmation
+    authentication.save!
+    user
+  end
+
 end # class User
 
