@@ -3,7 +3,7 @@ class Authentication
   include Model
   include Aerogel::Db::SecurePassword
 
-  VALID_TYPES = [:password, :github]
+  VALID_PROVIDERS = Aerogel::Auth::PROVIDERS.keys
 
   embedded_in :user
 
@@ -21,7 +21,7 @@ class Authentication
 
   # validations:
   validates_presence_of :provider, :uid
-  validates :provider, inclusion: { in: VALID_TYPES }
+  validates :provider, inclusion: { in: VALID_PROVIDERS }
   # validates :password, length: { minimum: 8 }, allow_nil: true
 
   # validates uniqueness of provider & uid among all users

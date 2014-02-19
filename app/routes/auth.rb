@@ -12,10 +12,7 @@ route :get, :post, "/auth/:provider/callback" do
 
   if user
     # registered user
-
-    auth_login( user, !!params['remember_me'] ) if user
-
-    username = user ? user.full_name : 'unknown-user'
+    auth_login( user, !!params['remember_me'] )
     logger.debug( "successfully authenticated: #{params.inspect} ")
     logger.debug( "user: #{user} ")
     auth_state result: :success
@@ -27,7 +24,7 @@ route :get, :post, "/auth/:provider/callback" do
       flash[:error] = "Failed to register new User: #{user.errors.inspect}"
       auth_redirect_to_origin( params["on_failure"] )
     end
-    auth_login( user, !!params['remember_me'] ) if user
+    auth_login( user, !!params['remember_me'] )
     flash[:notice] = "Welcome, #{user.full_name}! Please review and update your details if necessary."
     redirect "/user/edit"
   end

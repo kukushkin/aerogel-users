@@ -16,7 +16,10 @@
     <%= field :remember_me, as: :checkbox %>
 
     <%= button "Log in" %>
-    using <%= link_to '/auth/github?origin='+params['on_success'], 'GitHub' %>
+    using
+    <%= link_to '/auth/github?origin='+params['on_success'], 'GitHub' %>
+    <%= link_to '/auth/twitter?origin='+params['on_success'], 'Twitter' %>
+    <%= link_to '/auth/facebook?origin='+params['on_success'], 'Facebook' %>
 <% end %>
 
 
