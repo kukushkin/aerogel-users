@@ -6,7 +6,8 @@
     <%= field :full_name %>
 <p>
     Can log in using:
-    <%= current_user.authentications.map(&:provider).map{|p| icon("fa-#{p}-square fa-2x", title: p)}.join(',') %>
+    <%= current_user.authentications.map(&:provider).map{|p| icon("#{Aerogel::Auth.providers[p][:icon]} fa-2x",
+        title: Aerogel::Auth.providers[p][:name] ) }.join(',') %>
 </p>
 
 <%= button "Save changes" %>

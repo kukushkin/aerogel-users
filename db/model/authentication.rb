@@ -3,7 +3,7 @@ class Authentication
   include Model
   include Aerogel::Db::SecurePassword
 
-  VALID_PROVIDERS = Aerogel::Auth::PROVIDERS.keys
+  VALID_PROVIDERS = Aerogel::Auth.providers.keys
 
   embedded_in :user
 

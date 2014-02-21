@@ -2,14 +2,23 @@ module Aerogel
 module Auth
 
   # known providers
-  PROVIDERS = {
-    password: { name: "Password", gem: nil },
-    github: { name: "GitHub", gem: 'omniauth-github' },
-    facebook: { name: "Facebook", gem: 'omniauth-facebook' },
-    twitter: { name: "Twitter", gem: 'omniauth-twitter' },
-    linkedin: { name: "LinkedIn", gem: 'omniauth-linkedin-oauth2' },
-    vkontakte: { name: "Vkontakte", gem: 'omniauth-vkontakte' }
-  }
+#  PROVIDERS = {
+#    password: { name: "Password", gem: nil },
+#    github: { name: "GitHub", gem: 'omniauth-github' },
+#    facebook: { name: "Facebook", gem: 'omniauth-facebook' },
+#    twitter: { name: "Twitter", gem: 'omniauth-twitter' },
+#    linkedin: { name: "LinkedIn", gem: 'omniauth-linkedin-oauth2' },
+#    vkontakte: { name: "Vkontakte", gem: 'omniauth-vkontakte' }
+#  }
+#
+  PROVIDERS = nil
+
+  # Returns hash of registered omniauth providers.
+  #
+  def self.providers
+    return @providers unless @providers.nil?
+    @providers = Aerogel.config.auth.providers.to_hash
+  end
 
   # Returns list of enabled omniauth providers as symbols.
   #
@@ -19,7 +28,7 @@ module Auth
   def self.enabled_providers
     return @enabled_providers unless @enabled_providers.nil?
     @enabled_providers = []
-    PROVIDERS.each do |provider, opts|
+    providers.each do |provider, opts|
       # always enable :password
       next unless provider == :password || Aerogel.config.auth.send( :"#{provider}?" )
       @enabled_providers << provider
@@ -31,9 +40,9 @@ module Auth
   #
   def self.load_provider_gems
     enabled_providers.each do |provider_key|
-      gem_name = PROVIDERS[provider_key][:gem]
+      gem_name = providers[provider_key][:gem_name]
       puts "** requiring #{provider_key}: #{gem_name}"
-      require PROVIDERS[provider_key][:gem] if gem_name
+      require gem_name if gem_name
     end
   end
 
