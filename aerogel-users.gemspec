@@ -5,7 +5,7 @@ require 'aerogel/users/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "aerogel-users"
-  spec.version       = Aerogel::Module123::VERSION
+  spec.version       = Aerogel::Users::VERSION
   spec.authors       = ["Alex Kukushkin"]
   spec.email         = ["alex@kukushk.in"]
   spec.description   = %q{User management for aerogel}
