@@ -9,7 +9,8 @@
         <%= field :confirmed, readonly: true %>
     <% end %>
 <p>
-    Can log in using: <%= current_user.authentications.map(&:provider).join(',') %>
+    Can log in using:
+    <%= current_user.authentications.map(&:provider).map{|p| icon("fa-#{p}-square fa-2x", title: p)}.join(',') %>
 </p>
 <p>
     <%= link_to '/user/edit', 'Edit user profile' %>

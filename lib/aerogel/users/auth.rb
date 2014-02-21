@@ -3,12 +3,12 @@ module Auth
 
   # known providers
   PROVIDERS = {
-    password: { gem: nil },
-    github: { gem: 'omniauth-github' },
-    facebook: { gem: 'omniauth-facebook' },
-    twitter: { gem: 'omniauth-twitter' },
-    linkedin: { gem: 'omniauth-linkedin-oauth2' },
-    vkontakte: { gem: 'omniauth-vkontakte' }
+    password: { name: "Password", gem: nil },
+    github: { name: "GitHub", gem: 'omniauth-github' },
+    facebook: { name: "Facebook", gem: 'omniauth-facebook' },
+    twitter: { name: "Twitter", gem: 'omniauth-twitter' },
+    linkedin: { name: "LinkedIn", gem: 'omniauth-linkedin-oauth2' },
+    vkontakte: { name: "Vkontakte", gem: 'omniauth-vkontakte' }
   }
 
   # Returns list of enabled omniauth providers as symbols.

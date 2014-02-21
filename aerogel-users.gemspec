@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "aerogel-core", ">= 1.2.0"
+  spec.add_dependency "aerogel-font-awesome"
   spec.add_dependency "omniauth"
   spec.add_dependency "bcrypt-ruby"
 

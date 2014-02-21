@@ -5,7 +5,8 @@
 <% form @user do %>
     <%= field :full_name %>
 <p>
-    Can log in using: <%= current_user.authentications.map(&:provider).join(',') %>
+    Can log in using:
+    <%= current_user.authentications.map(&:provider).map{|p| icon("fa-#{p}-square fa-2x", title: p)}.join(',') %>
 </p>
 
 <%= button "Save changes" %>
