@@ -1,0 +1,5 @@
+<%= link_to url_to_social_login( provider ),
+    icon("#{Aerogel::Auth.providers[provider][:icon]} fa-2x")+
+    " #{Aerogel::Auth.providers[provider][:name]}",
+    class: "btn btn-default"
+%>

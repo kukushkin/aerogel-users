@@ -1,5 +1,0 @@
-<% Aerogel::Auth.enabled_providers.each do |provider_key| -%>
-<%   next if provider_key == :password -%>
-<%= link_to_social_login provider_key, icon("#{Aerogel::Auth.providers[provider_key][:icon]} fa-2x") -%>
-
-<% end %>
