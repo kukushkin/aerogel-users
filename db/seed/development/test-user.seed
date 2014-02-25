@@ -30,6 +30,7 @@ find_by :full_name
 seeds [
 {
   full_name: 'test',
+  roles: [:user],
   emails:[{
     email: 'test@test',
     confirmed: true
@@ -44,6 +45,7 @@ seeds [
 },
 {
   full_name: 'test1',
+  roles: [:user],
   emails:[{
     email: 'test1@test',
     confirmed: true
@@ -58,6 +60,7 @@ seeds [
 },
 {
   full_name: 'test2',
+  roles: [:user],
   emails:[{
     email: 'test2@test',
     confirmed: true

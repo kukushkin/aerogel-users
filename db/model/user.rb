@@ -5,6 +5,7 @@ class User
   include Model
 
   field :full_name, type: String
+  field :roles, type: Array
 
   validates_presence_of :full_name
 
@@ -56,6 +57,7 @@ class User
 
     self.new(
       full_name: object.full_name,
+      roles: [:user],
       emails: [{
         email: object.email,
         confirmed: false
@@ -80,6 +82,7 @@ class User
     emails << { email: info['email'], confirmed: false } if info['email']
     self.new(
       full_name: info['name'],
+      roles: [:user],
       emails: emails,
       authentications: [{
         provider: omniauth_hash.provider.to_sym,

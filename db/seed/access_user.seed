@@ -1,0 +1,25 @@
+# A .seed file is a .conf file which stores
+# database seed data and rules.
+#
+
+# Model class to use
+#
+# ! required
+model Access
+
+# Attribute name or a list of attribute names to be used as key(s)
+# when finding objects
+#
+# Usage:
+#   find_by :name
+# or
+#   find_by [:first_name, :last_name]
+#
+# ! required
+find_by [:path, :role]
+
+seeds [
+{ path: '/user',      access: :R,   role: :user },
+{ path: '/user/edit', access: :RW,  role: :user }
+]
+

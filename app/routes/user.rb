@@ -175,22 +175,6 @@ namespace '/user' do
     view "user/#{action}"
   end
 
-  before '/*' do
-    restricted_area = %w(/user /user/edit)
-    if restricted_area.include?( request.path_info ) && current_user.nil?
-      flash[:error] = "Access denied: #{request.path_info}"
-      redirect "/"
-    end
-  end
-
-  before do
-    restricted_area = %w(/user /user/edit)
-    if restricted_area.include?( request.path_info ) && current_user.nil?
-      flash[:error] = "EMPTY Access denied: #{request.path_info}"
-      redirect "/"
-    end
-  end
-
 
 end # namespace '/user'
 
