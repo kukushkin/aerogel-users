@@ -1,6 +1,14 @@
 
 namespace '/user' do
 
+  before do
+    on_access_denied do |path|
+      unless current_user?
+        redirect "/user/login?on_success=#{path}"
+      end
+    end
+  end
+
   get '/login' do
     @error_message = nil
     params['on_success'] ||= auth_state['on_success'] || '/'
@@ -157,7 +165,7 @@ namespace '/user' do
       pass
     end
     unless @user.id == current_user.id
-      flash[:error] = "Access denied"
+      flash[:error] = "Access denied, user profile does not belong to you"
       redirect '/user'
     end
     unless @user.update_attributes params[:user]
