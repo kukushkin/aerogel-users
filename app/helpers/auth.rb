@@ -27,11 +27,15 @@ def auth_keepalive_session
   session.options[:expire_after] = 2592000 if session[:remember_me]
 end
 
+# Returns User object of the current authenticated user or +nil+.
+#
 def current_user
   auth_keepalive_session
   @current_user ||= ( session[:user_id] ? User.find( session[:user_id] ) : nil )
 end
 
+# Returns +true+ if user is authenticated, +false+ otherwise.
+#
 def current_user?
   !current_user.nil?
 end
