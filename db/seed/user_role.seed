@@ -1,0 +1,8 @@
+model Role
+
+find_by [:slug]
+
+seeds [
+{ slug: :user,  name: "Registered user" }
+]
+

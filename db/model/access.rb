@@ -2,10 +2,9 @@ class Access
 
   include Model
 
-  R = :R
-  W = :W
-  RW = :RW
-  ACCESS_TYPES = [R, W, RW]
+  READ = :R
+  WRITE = :RW
+  ACCESS_TYPES = [READ, WRITE]
 
   field :path, type: String
   field :access, type: Symbol
@@ -15,22 +14,40 @@ class Access
   validates_presence_of :path, :access, :role
   validates :access, inclusion: { in: ACCESS_TYPES }
 
+  # Sets path pattern for the rule and compiles it to path matcher Regexp.
+  #
   def path=( value )
     self.path_matcher = self.class.compile_matcher value
-    puts "path=#{value}, path_matcher=#{path_matcher}"
     super( value )
   end
 
+  # Returns true if the rule matches path.
+  #
   def match?( path )
     path_matcher =~ path
   end
 
+  # Returns true if the rule permits requested access.
+  # +path+ should match this rule's path
+  # +access+ should be granted by this rule
+  # +roles+ should include rule's role
+  #
+  def grants?( path, access, roles )
+    roles = [*roles]
+    self.match?( path ) && ( self.access == WRITE || self.access == access ) && roles.include?( role )
+  end
+
+  # Returns list of rules that restrict access to the given +path+.
+  #
   def self.rules_for_path( path )
     self.all.select{|r| r.match? path }
   end
 
+
 private
 
+  # Returns Regexp matcher for given +path+ pattern.
+  #
   def self.compile_matcher( path )
     re = path.gsub(/\*{1,2}/) do |match|
       match == "**" ? ".*" : "[^\/]*"
