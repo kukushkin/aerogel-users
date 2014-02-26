@@ -24,3 +24,9 @@ end
 def link_to_if_can( url, text = url, opts = {} )
   link_to( url, text, opts ) if can?( url )
 end
+
+
+def on_access_denied( &block )
+  @on_access_denied_callback = block if block_given?
+  @on_access_denied_callback
+end

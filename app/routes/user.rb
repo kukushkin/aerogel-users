@@ -1,3 +1,4 @@
+
 namespace '/user' do
 
   get '/login' do
