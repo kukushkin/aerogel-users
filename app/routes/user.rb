@@ -168,7 +168,7 @@ namespace '/user' do
       flash[:error] = "Access denied, user profile does not belong to you"
       redirect '/user'
     end
-    unless @user.update_attributes params[:user]
+    unless @user.update_attributes params[:user].except( :roles )
       flash[:error] = "Failed to update user profile"
       pass
     end
