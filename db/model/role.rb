@@ -8,4 +8,10 @@ class Role
   validates_presence_of :name, :slug
   validates_uniqueness_of :slug
 
+  # Returns lisf of registered slugs
+  #
+  def self.slugs
+    self.only(:slug).map(&:slug)
+  end
+
 end # class Role

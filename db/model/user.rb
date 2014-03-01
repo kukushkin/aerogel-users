@@ -15,6 +15,26 @@ class User
   embeds_many :emails, class_name: "UserEmail"
   accepts_nested_attributes_for :emails
 
+  # validations:
+  validate do |record|
+    # validate roles
+    if record.roles_changed?
+      unless Role.slugs.contains? record.roles
+        record.errors.add :roles, 'contains invalid roles'
+      end
+    end
+  end
+
+  # accessors:
+  def roles=( value )
+    if value.is_a? Array
+      self[:roles] = value
+    elsif value.is_a? String
+      self[:roles] = value.split(",").map{|v| v.strip.to_sym}
+    else
+      raise ArgumentError.new "Invalid value of class #{value.class} passed to roles= setter"
+    end
+  end
 
   # methods:
 
