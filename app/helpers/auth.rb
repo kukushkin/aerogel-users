@@ -14,6 +14,7 @@ end
 def auth_login( user, remember_me = false )
   session[:user_id] = user.id
   session[:remember_me] = remember_me
+  user.touch_authenticated_at!
   auth_keepalive_session
 end
 

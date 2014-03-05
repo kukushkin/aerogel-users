@@ -3,9 +3,11 @@ require 'securerandom'
 class User
 
   include Model
+  include Model::Timestamps
 
   field :full_name, type: String
   field :roles, type: Array
+  field :authenticated_at, type: Time
 
   validates_presence_of :full_name
 
@@ -14,6 +16,8 @@ class User
 
   embeds_many :emails, class_name: "UserEmail"
   accepts_nested_attributes_for :emails
+
+
 
   # validations:
   validate do |record|
@@ -52,7 +56,7 @@ class User
     if provider == :password
       a = user.authentications.where( provider: provider, uid: params['uid'] ).first
       if a.password_is? params['password']
-        user
+        user.
       else
         nil
       end
@@ -196,6 +200,15 @@ class User
     authentication.password_confirmation = password_confirmation
     authentication.save!
     user
+  end
+
+
+  # Updates authenticated_at, does not change other timestamps.
+  # Returns self.
+  #
+  def touch_authenticated_at!
+    self.timeless.update_attributes authenticated_at: Time.now
+    self
   end
 
 end # class User
