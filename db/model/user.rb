@@ -56,7 +56,7 @@ class User
     if provider == :password
       a = user.authentications.where( provider: provider, uid: params['uid'] ).first
       if a.password_is? params['password']
-        user.
+        user
       else
         nil
       end
