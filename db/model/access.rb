@@ -14,6 +14,15 @@ class Access
   validates_presence_of :path, :access, :role
   validates :access, inclusion: { in: ACCESS_TYPES }
 
+  validate do |record|
+    # validate roles
+    if record.role_changed?
+      unless Role.slugs.include? record.role
+        record.errors.add :role, 'is invalid'
+      end
+    end
+  end
+
   # Sets path pattern for the rule and compiles it to path matcher Regexp.
   #
   def path=( value )
