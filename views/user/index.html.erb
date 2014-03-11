@@ -1,4 +1,4 @@
-<% page_title 'User profile' %>
+<% page_title t.aerogel.users.views.index.title %>
 
 <% form current_user do %>
     <%= field :full_name, readonly: true %>
@@ -7,12 +7,13 @@
         <%= field :confirmed, readonly: true %>
     <% end %>
 <p>
-    Can log in using:
+    <%= User.human_attribute_name :authentications %>:<br/>
+
     <%= current_user.authentications.map(&:provider).map{|p| icon("#{Aerogel::Auth.providers[p][:icon]} fa-2x",
         title: Aerogel::Auth.providers[p][:name] ) }.join(',') %>
 </p>
 <p>
-    <%= link_to '/user/edit', 'Edit user profile' %>
+    <%= link_to '/user/edit', t.aerogel.users.actions.edit.to_s %>
 </p>
 
 <% end %>

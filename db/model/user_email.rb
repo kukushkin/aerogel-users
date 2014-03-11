@@ -11,7 +11,7 @@ class UserEmail
   # validates uniqueness of email among all users
   validate do |record|
     if User.elem_match( :emails => { :email => record.email, :_id.ne => record.id } ).count > 0
-      record.errors.add :email, 'must be unique'
+      record.errors.add :email, :unique
     end
   end
 

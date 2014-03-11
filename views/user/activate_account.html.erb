@@ -1,8 +1,3 @@
-<% page_title "Success!" %>
+<% page_title t.aerogel.users.views.activate_account.title %>
 
-<p>
-Welcome, <%= @user.full_name %>! Your account is activated.
-</p>
-<p>
-You can <a href="/user/login">log in</a> to your account now.
-</p>
+<%= t.aerogel.users.views.activate_account.text full_name: h(@user.full_name) %>

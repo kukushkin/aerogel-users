@@ -27,7 +27,7 @@ class Authentication
   # validates uniqueness of provider & uid among all users
   validate do |record|
     if User.elem_match( :authentications => { :provider => record.provider, :uid => record.uid, :_id.ne => record.id } ).count > 0
-      record.errors.add :uid, 'must be unique'
+      record.errors.add :uid, :unique
     end
   end
 

@@ -1,0 +1,14 @@
+ru:
+    aerogel:
+        users:
+            actions:
+                login: Войти
+                logged_in: Вход выполнен
+                logout: Выйти
+                logged_out: Выход выполнен
+                edit: Редактировать учётную запись
+                register: Создать учётную запись
+                registered: Учётная запись создана
+                request_account_activation: Запросить активацию учётной записи
+                request_email_confirmation: Запросить подтвержение адреса email
+                request_password_reset: Запросить переустановку пароля

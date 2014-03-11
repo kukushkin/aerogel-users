@@ -1,13 +1,14 @@
-<% page_title 'Edit user profile' %>
+<% page_title t.aerogel.users.views.edit.title %>
 
 <% form @user do %>
     <%= field :full_name %>
 <p>
-    Can log in using:
+    <%= User.human_attribute_name :authentications %>:<br/>
+
     <%= current_user.authentications.map(&:provider).map{|p| icon("#{Aerogel::Auth.providers[p][:icon]} fa-2x",
         title: Aerogel::Auth.providers[p][:name] ) }.join(',') %>
 </p>
 
-<%= button "Save changes" %>
+<%= button :save %>
 
 <% end %>

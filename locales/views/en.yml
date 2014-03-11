@@ -1,0 +1,111 @@
+en:
+    aerogel:
+        users:
+            views:
+                login:
+                    forgot_your_password: Forgot your password?
+                    remember_me: Remember me
+                    you_can_also_login_with: You can also log in with
+
+                logout:
+                    text: |
+                        <p>You have successfully logged out.<p>
+                        <p>Proceed to <a href='/'>home page</a>.<p>
+
+                index:
+                    title: "Account details"
+                edit:
+                    title: "Edit account details"
+
+
+
+                register: ''
+                register_success:
+                    title: "Almost there..."
+                    text: |
+                        <p>Your account is almost ready.</p>
+                        <p>
+                            We have sent you a message with a link to confirm your email address.
+                            Open the message and click the link to activate the account.
+                        </p>
+
+                request_account_activation:
+                    title: "Request account activation"
+                    text: |
+                        <p>
+                            You haven't received an account activation message from us? Try requesting this message again.
+                        </p>
+
+                request_account_activation_success:
+                    title: "Account activation message sent"
+                    text: |
+                        <p>
+                            We have sent you a message with a link to confirm your email address.
+                            Open the message and click the link to activate the account.
+                        </p>
+
+                request_email_confirmation:
+                    title: "Request email confirmation"
+                    text: |
+                        <p>
+                            You haven't received an email confirmation message from us? Try requesting this message again.
+                        </p>
+
+                request_email_confirmation_success:
+                    title: "Email confirmation message sent"
+                    text: |
+                        <p>
+                            We have sent you a message with a link to confirm your email address.
+                            Open the message and click the link to confirm it.
+                        </p>
+
+                request_password_reset:
+                    title: "Request password reset"
+                    text: |
+                        <p>
+                            Forgot your password? You can request reset of your password here.
+                            An email will be sent to you with further instructions.
+                        </p>
+
+                request_password_reset_success:
+                    title: "Password reset message sent"
+                    text: |
+                        <p>
+                            We have sent you a message with a link to password reset page.
+                            Open the message and click the link to set new password.
+                        </p>
+
+                activate_account:
+                    title: "Success!"
+                    text: |
+                        <p>
+                            Welcome, %{full_name}! Your account is activated.
+                        </p>
+                        <p>
+                            You can <a href="/user/login">log in</a> to your account now.
+                        </p>
+
+                activate_account_failure:
+                    title: "Failed to activate account"
+                    text: |
+                        <p>
+                            Account activation failed.
+                            Be sure that you have copied the complete URL and try again.
+                        </p>
+
+                confirm_email:
+                    title: "Success!"
+                    text: |
+                        <p>
+                            Your email address is confirmed.
+                        </p>
+
+                confirm_email_failure:
+                    title: "Failed to confirm email"
+                    text: |
+                        <p>
+                            Email confirmation failed.
+                            Be sure that you have copied the complete URL and try again.
+                        </p>
+
+

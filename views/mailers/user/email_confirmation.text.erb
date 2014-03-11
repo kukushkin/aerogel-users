@@ -1,5 +1,3 @@
-Hello, <%= user_email.user.full_name %>!
+<%= t.aerogel.users.mailers.email_confirmation.text.title full_name: full_name %>
 
-To confirm your email address, copy and paste the following URL into your browser's address bar and press Enter.
-
-http://<%= config.hostname! %>/user/confirm_email?email=<%= user_email.email %>&token=<%= user_email.confirmation_token %>
+<%= t.aerogel.users.mailers.email_confirmation.text.text url: url %>

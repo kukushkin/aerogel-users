@@ -18,7 +18,7 @@ class Access
     # validate roles
     if record.role_changed?
       unless Role.slugs.include? record.role
-        record.errors.add :role, 'is invalid'
+        record.errors.add :role, :invalid
       end
     end
   end

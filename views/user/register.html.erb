@@ -1,10 +1,10 @@
-<% page_title 'Create account' %>
+<% page_title t.aerogel.users.actions.register %>
 
 <% form @user_registration_form do  %>
     <%= field :full_name %>
     <%= field :email %>
     <%= field :password %>
     <%= field :password_confirmation %>
-<%= button 'Create' %>
+<%= button :create %>
 
 <% end %>

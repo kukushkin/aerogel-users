@@ -1,0 +1,22 @@
+en:
+    aerogel:
+        auth:
+            welcome:
+                Welcome, %{full_name}!
+            welcome_new_user:
+                "Welcome, %{full_name}! Please review and update your details if necessary."
+
+            errors:
+                invalid_credentials:
+                    "Failed to log in with %{provider} because of invalid credentials"
+                unknown:
+                    "Failed to log in with %{provider}, unknown error: %{message}"
+                create_from_omniauth:
+                    "Failed to register new user because of following errors: %{errors}"
+
+            password:
+                errors:
+                    invalid_credentials:
+                        Invalid user email or password
+                    account_not_activated:
+                        "Your account is not activated yet. Request <a href='/user/request_account_activation'>account activation</a> again."

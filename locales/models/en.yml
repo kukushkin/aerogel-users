@@ -1,0 +1,63 @@
+en:
+    attributes:
+        created_at: "Created @"
+        updated_at: "Updated @"
+        email: "Email"
+        full_name: "Full name"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        name: "Name"
+        uid: "UID"
+        id: "ID"
+        slug: "Slug"
+
+
+    mongoid:
+        models:
+            access: Access
+            authentication: Authentication method
+            role: Role
+            user: User
+            user_email: User email
+            user_registration_form: User registration form
+            user_request_account_activation_form: Account activation request form
+            user_request_email_confirmation_form: Email confirmation request form
+            user_request_password_reset_form: Password reset request form
+            user_reset_password_form: Password reset form
+
+        attributes:
+            access:
+                path: Path
+                access: Access
+                role: Role
+            authentication:
+                provider: Provider
+                info: Info
+            role:
+            user:
+                roles: "Roles"
+                authentications: "Authentication methods"
+                emails: "List of emails"
+                authenticated_at: "Authenticated @"
+            user_email:
+                confirmed: Confirmed
+
+            user_registration_form:
+
+    errors:
+        messages:
+                user_not_found: "Failed to find user"
+                user_email_not_found: "Failed to find user email"
+                account_already_activated: "Account is already activated"
+                email_already_confirmed: "Email is already confirmed"
+                invalid_confirmation_token: "Confirmation token is invalid"
+
+        attributes:
+            email:
+                not_registered: "is not registered for any user"
+                already_confirmed: "is already confirmed"
+                password_login_not_allowed: "does not allow to log in using password"
+            roles:
+                invalid_roles: "contains invalid roles"
+
+

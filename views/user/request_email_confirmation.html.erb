@@ -1,10 +1,8 @@
-<% page_title 'Request email confirmation' %>
+<% page_title t.aerogel.users.views.request_email_confirmation.title %>
 
-<p>
-    You haven't received an email confirmation message from us? Try requesting this message again.
-</p>
+<%= t.aerogel.users.views.request_email_confirmation.text %>
+
 <% form @user_request_email_confirmation_form do  %>
     <%= field :email %>
-<%= button 'Request email confirmation message' %>
-
+    <%= button :submit, label: t.aerogel.users.actions.request_email_confirmation %>
 <% end %>

@@ -15,21 +15,24 @@ namespace '/user' do
     params['on_failure'] ||= auth_state['on_failure'] || '/user/login'
     params['email'] ||= auth_state['email']
     if auth_state['result'] == 'error'
-      if auth_state['error'] == 'invalid_credentials'
-        @error_message = "Invalid email or password"
-      elsif auth_state['error'] == 'account_not_activated'
-        @error_message = "Your account is not activated yet. "+
-        "Request <a href='/user/request_account_activation'>account activation</a> again."
-      else
-        @error_message = "Failed to log in: #{auth_state['error']}"
-      end
+      auth_state['provider'] ||= "i_think_its_password"
+      # error messages are looked up in the following order:
+      # aerogel.auth.<provider>.errors.<message>
+      # aerogel.auth.errors.<message>
+      # aerogel.auth.errors.unknown
+      @error_message = t.aerogel.auth.send( auth_state['provider'].to_sym ).errors.send(
+          auth_state['error'].to_sym,
+          default: [ "aerogel.auth.errors.#{auth_state['error']}".to_sym, :'aerogel.auth.errors.unknown' ],
+          provider: auth_state['provider'],
+          message: auth_state['error']
+      )
     end
     pass
   end
 
   get '/logout' do
     auth_logout
-    flash.now[:notice] = "Logged out"
+    flash.now[:notice] = t.aerogel.users.actions.logged_out
     pass
   end
 
@@ -46,7 +49,8 @@ namespace '/user' do
     pass unless @user_registration_form.valid?
     user = User.create_from @user_registration_form
     unless user.save
-      flash[:error] = "Failed to save User: #{user.errors.inspect}"
+      flash[:error] = t.aerogel.db.errors.failed_to_save name: user.model_name.human,
+        errors: user.errors.full_messages.join(', ')
       pass
     end
     user.request_activation!

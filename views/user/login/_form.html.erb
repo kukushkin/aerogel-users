@@ -9,15 +9,18 @@
   <%= hidden :on_failure, params['on_failure'] %>
 
   <%= field :email, value: params['email'] %>
-  <%= field :password, hint: link_to( '/user/request_password_reset', 'Forgot your password?') %>
-  <%= field :remember_me, as: :checkbox %>
+  <%= field :password,
+    hint: link_to( '/user/request_password_reset', t.aerogel.users.views.login.forgot_your_password.to_s ) %>
+  <%= field :remember_me, as: :checkbox, label: t.aerogel.users.views.login.remember_me %>
 
-  <%= button "Log in" %> or <a href="/user/register">Create an account</a>.
+  <%= button :submit, label: t.aerogel.users.actions.login %>
+  <%= t 'or' %>
+  <a href="/user/register"><%= t.aerogel.users.actions.register %></a>.
 <% end %>
 
 <% if Aerogel::Auth.enabled_providers.except(:password).present? %>
     <hr/>
-    You can also log in with:
+    <%= t.aerogel.users.views.login.you_can_also_login_with %>:
     <%= partial "user/login/provider",
         collection: Aerogel::Auth.enabled_providers.except(:password)
     %>

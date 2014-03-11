@@ -24,7 +24,7 @@ class User
     # validate roles
     if record.roles_changed?
       unless Role.slugs.contains? record.roles
-        record.errors.add :roles, 'contains invalid roles'
+        record.errors.add :roles, :invalid_roles
       end
     end
   end
@@ -164,11 +164,11 @@ class User
   #
   def self.confirm_email!( email, token )
     user = self.where( 'emails.email' => email ).first
-    raise NotFoundError.new "Failed to find user by email" unless user
+    raise NotFoundError.new :user_not_found unless user
     user_email = user.emails.where( email: email ).first
-    raise NotFoundError.new "Failed to find email object" unless user_email
-    raise "Email is already confirmed" if user_email.confirmed?
-    raise "Confirmation token is invalid" if !token.nil? && user_email.confirmation_token != token
+    raise NotFoundError.new :user_email_not_found unless user_email
+    raise InvalidOperationError.new :email_already_confirmed if user_email.confirmed?
+    raise InvalidOperationError.new :invalid_confirmation_token if !token.nil? && user_email.confirmation_token != token
     user_email.confirmed = true
     user_email.save!
     user

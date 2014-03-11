@@ -1,0 +1,15 @@
+en:
+    aerogel:
+        users:
+            actions:
+                login: Log in
+                logged_in: Logged in
+                logout: Log out
+                logged_out: Logged out
+                edit: Edit account details
+                register: Create an account
+                registered: Account created
+                request_account_activation: Request account activation
+                request_email_confirmation: Request email confirmation message
+                request_password_reset: Request password reset
+

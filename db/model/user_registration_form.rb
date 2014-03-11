@@ -8,14 +8,14 @@ class UserRegistrationForm
 
   validates_presence_of :full_name, :email, :password, :password_confirmation
   validates_confirmation_of :password
-  validates_format_of :email, with: /@/, message: 'invalid email'
+  validates_format_of :email, with: /@/, message: :invalid_format
 
   # validates uniqueness of provider & uid (email) among all users
   validate do |record|
     if User.elem_match( :authentications => { :provider => :password, :uid => record.email } ).count > 0
-      record.errors.add :email, 'is already in use'
+      record.errors.add :email, :taken
     elsif User.elem_match( :emails => { :email => record.email } ).count > 0
-      record.errors.add :email, 'is already in use'
+      record.errors.add :email, :taken
     end
   end
 

@@ -1,0 +1,22 @@
+ru:
+    aerogel:
+        auth:
+            welcome:
+                Добро пожаловать, %{full_name}!
+            welcome_new_user:
+                "Добро пожаловать, %{full_name}! Пожалуйста проверьте информацию о вас и исправьте если необходимо."
+
+            errors:
+                invalid_credentials:
+                    "Не удалось выполнить вход с помощью %{provider} из-за отказа в доступе"
+                unknown:
+                    "Не удалось выполнить вход с помощью %{provider}, неизвестная ошибка: %{message}"
+                create_from_omniauth:
+                    "Не удалось зарегистрировать нового пользователя из-за следующих ошибок: %{errors}"
+
+            password:
+                errors:
+                    invalid_credentials:
+                        Неправильный email пользователя или пароль
+                    account_not_activated:
+                        "Ваша учётная запись ещё не активирована. Запросите <a href='/user/request_account_activation'>активацию учётной записи</a> ещё раз."

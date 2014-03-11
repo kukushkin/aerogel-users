@@ -1,6 +1,3 @@
-<h1>Welcome, <%= user_email.user.full_name %>!</h1>
-<p>
-    Your account is almost ready. The only thing left is to confirm your email address
-    by clicking
-    <a href="http://<%= config.hostname! %>/user/activate_account?email=<%= user_email.email %>&token=<%= user_email.confirmation_token %>">this link</a>.
-</p>
+<%= t.aerogel.users.mailers.account_activation.html.title full_name: full_name %>
+
+<%= t.aerogel.users.mailers.account_activation.html.text url: url %>
