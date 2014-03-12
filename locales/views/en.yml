@@ -108,4 +108,15 @@ en:
                             Be sure that you have copied the complete URL and try again.
                         </p>
 
+                reset_password:
+                    title: "Reset password"
+
+                reset_password_success:
+                    title: Password successfully changed
+                    text: |
+                        <p>
+                        Your new password is set. You can now <a href='/user/login'>log in</a> to your account.
+                        </p>
+
+
 
