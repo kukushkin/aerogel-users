@@ -37,6 +37,8 @@ ru:
                 roles: "Роли"
                 authentications: "Методы аутентификации"
                 emails: "Список email адресов"
+                created_at: "Создан"
+                updated_at: "Обновлён"
                 authenticated_at: "Вход выполнен"
             user_email:
                 confirmed: Подтверждён

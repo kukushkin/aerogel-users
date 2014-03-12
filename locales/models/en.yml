@@ -38,7 +38,9 @@ en:
                 roles: "Roles"
                 authentications: "Authentication methods"
                 emails: "List of emails"
-                authenticated_at: "Authenticated @"
+                created_at: "Created at"
+                updated_at: "Updated at"
+                authenticated_at: "Authenticated at"
             user_email:
                 confirmed: Confirmed
 
