@@ -32,7 +32,7 @@ class User
   # accessors:
   def roles=( value )
     if value.is_a? Array
-      self[:roles] = value
+      self[:roles] = value.map(&:to_sym)
     elsif value.is_a? String
       self[:roles] = value.split(",").map{|v| v.strip.to_sym}
     else
