@@ -11,10 +11,10 @@ def auth_redirect_to_origin( explicit_origin, default_origin = "/" )
   redirect url
 end
 
-def auth_login( user, remember_me = false )
+def auth_login( user, opts = {} )
   session[:user_id] = user.id
-  session[:remember_me] = remember_me
-  user.touch_authenticated_at!
+  session[:remember_me] = !!opts[:remember_me]
+  user.authenticated!( opts )
   auth_keepalive_session
 end
 

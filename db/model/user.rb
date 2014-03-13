@@ -198,16 +198,24 @@ class User
     raise "Password reset token is invalid" if authentication.password_reset_token != token
     authentication.password = password
     authentication.password_confirmation = password_confirmation
+    authentication.password_reset_token = nil
     authentication.save!
     user
   end
 
 
   # Updates authenticated_at, does not change other timestamps.
+  # Resets password_reset_token if :provider is 'password'
   # Returns self.
   #
-  def touch_authenticated_at!
+  def authenticated!( opts = {} )
     self.timeless.update_attributes authenticated_at: Time.now
+    if opts[:provider] == 'password'
+      authentication = self.authentications.where( provider: :password, uid: opts[:uid] ).first
+      unless authentication.password_reset_token.nil?
+        authentication.update_attributes password_reset_token: nil
+      end
+    end
     self
   end
 
