@@ -1,14 +1,8 @@
 <% page_title t.aerogel.users.views.edit.title %>
 
+<!-- % form @user, html_params: { enctype: "multipart/form-data"} do % -->
 <% form @user do %>
     <%= field :full_name %>
-<p>
-    <%= User.human_attribute_name :authentications %>:<br/>
-
-    <%= current_user.authentications.map(&:provider).map{|p| icon("#{Aerogel::Auth.providers[p][:icon]} fa-2x",
-        title: Aerogel::Auth.providers[p][:name] ) }.join(',') %>
-</p>
-
 <%= button :save %>
 
 <% end %>

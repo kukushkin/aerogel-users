@@ -165,18 +165,17 @@ namespace '/user' do
   post '/edit' do
     @user = User.find( params[:id] )
     unless @user
-      flash[:error] = "Failed to locate user profile"
+      flash.now[:error] = t.error.messages.user_not_found
       pass
     end
     unless @user.id == current_user.id
-      flash[:error] = "Access denied, user profile does not belong to you"
-      redirect '/user'
+      redirect '/user', error: "Access denied, user profile does not belong to you"
     end
     unless @user.update_attributes params[:user].except( :roles )
-      flash[:error] = "Failed to update user profile"
+      flash.now[:error] = t.aerogel.db.errors.failed_to_save name: User.model_name.human,
+        errors: @user.errors.full_messages.join(", ")
       pass
     end
-    flash[:notice] = "User details saved"
     redirect '/user'
   end
 
