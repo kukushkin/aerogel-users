@@ -1,8 +1,6 @@
 <% page_title t.aerogel.users.views.edit.title %>
 
-<!-- % form @user, html_params: { enctype: "multipart/form-data"} do % -->
 <% form @user do %>
     <%= field :full_name %>
-<%= button :save %>
-
+    <%= button :save %>
 <% end %>
