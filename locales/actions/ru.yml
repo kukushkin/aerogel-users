@@ -1,5 +1,8 @@
 ru:
     aerogel:
+        auth:
+            actions:
+                access_denied: "Запрещён доступ к %{path} (%{access})"
         users:
             actions:
                 login: Войти

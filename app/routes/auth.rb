@@ -1,6 +1,6 @@
 # Authentication system routes
 route :get, :post, "/auth/:provider/callback" do
-  flash[:debug] = "params.inspect: #{params.inspect}"
+  # flash[:debug] = "params.inspect: #{params.inspect}"
 
   user = User.find_by_authentication( params[:provider].to_sym, request.env['omniauth.auth']['uid'] )
   if params[:provider] == 'password' && !user.activated?( request.env['omniauth.auth']['uid'] )

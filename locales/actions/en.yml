@@ -1,5 +1,8 @@
 en:
     aerogel:
+        auth:
+            actions:
+                access_denied: "Access denied to %{path} (%{access})"
         users:
             actions:
                 login: Log in
