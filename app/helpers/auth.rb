@@ -13,7 +13,7 @@ end
 
 def auth_login( user, opts = {} )
   session[:user_id] = user.id
-  session[:remember_me] = !!opts[:remember_me]
+  session[:remember_me] = opts[:remember_me].present?
   user.authenticated!( opts )
   auth_keepalive_session
 end
