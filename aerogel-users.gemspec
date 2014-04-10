@@ -18,7 +18,9 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "aerogel-core", ">= 1.2.0"
+  spec.add_dependency "aerogel-core", "~> 1.4"
+  spec.add_dependency "aerogel-forms", "~> 0.1"
+  spec.add_dependency "aerogel-mailer", "~> 1.1"
   spec.add_dependency "aerogel-font_awesome"
   spec.add_dependency "omniauth"
   spec.add_dependency "bcrypt"
