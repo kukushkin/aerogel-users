@@ -1,5 +1,4 @@
 require 'omniauth'
-require 'omniauth-github'
 require 'aerogel/core'
 require "aerogel/users/version"
 require "aerogel/users/auth"
