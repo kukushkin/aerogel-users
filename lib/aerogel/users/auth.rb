@@ -41,7 +41,7 @@ module Auth
   def self.load_provider_gems
     enabled_providers.each do |provider_key|
       gem_name = providers[provider_key][:gem_name]
-      puts "** requiring #{provider_key}: #{gem_name}"
+      # puts "** requiring #{provider_key}: #{gem_name}"
       require gem_name if gem_name
     end
   end
@@ -51,13 +51,13 @@ module Auth
   def self.load_middleware( app )
     load_provider_gems
     app.use OmniAuth::Builder do
-      puts "** configuring OmniAuth"
+      # puts "** configuring OmniAuth"
       provider :password, model: User
       Aerogel::Auth.enabled_providers.each do |provider_key|
         next if provider_key == :password
         provider_config = app.config.auth.send(provider_key)
         provider provider_key, provider_config.api_key!, provider_config.api_secret!
-        puts "** configuring #{provider_key}: #{provider_config.api_key!}"
+        # puts "** configuring #{provider_key}: #{provider_config.api_key!}"
       end
       on_failure {|env| OmniAuth::FailureEndpointEx.new(env).redirect_to_failure }
     end
