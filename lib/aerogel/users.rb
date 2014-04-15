@@ -1,5 +1,6 @@
 require 'omniauth'
 require 'aerogel/core'
+require 'aerogel/mailer'
 require "aerogel/users/version"
 require "aerogel/users/auth"
 require "aerogel/users/omniauth-password"
